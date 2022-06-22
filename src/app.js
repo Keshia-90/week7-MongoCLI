@@ -2,7 +2,7 @@ const yargs = require("yargs");
 
 const { connection, client } = require("./db/connection");
 
-const { addFilm, deleteFilm, listFilms} = require("./utils");
+const { addFilm, deleteFilm, listFilms, filmDelete} = require("./utils");
 
 const app = async (yargsObj) => {
     const collection = await connection();
@@ -10,7 +10,7 @@ const app = async (yargsObj) => {
         await addFilm(collection, {title: yargsObj.title, actor: yargsObj.actor});
         console.log("success, entry added");
     } else if(yargsObj.delete){
-        await deleteFilm(collection, {title: yargsObj.title, actor: yargsObj.actor});
+        await deleteFilm(collection, {title: yargsObj.title});
         console.log("success, entry deleted")
     } else if(yargsObj.list) {
         await listFilms(collection);

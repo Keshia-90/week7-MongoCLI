@@ -16,11 +16,10 @@ exports.listFilms = async (collection) => {
     }
 };
 
-exports.deleteFilm = async (collection, toDelete) => {
+exports.deleteFilm = async (collection, filmObj) => {
     try{
-        const deleteTitle = {title:toDelete};
-        const filmDelete = await collection.deleteOne(deleteTitle);
-        console.log(filmDelete);
+        const deleteFilm = await collection.deleteOne(filmObj);
+        console.log(deleteFilm);
     }
     catch (error){
         console.log(error);
