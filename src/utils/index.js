@@ -26,14 +26,3 @@ exports.deleteFilm = async (collection, filmObj) => {
     }
 };
 
-exports.updateFilm = async (collection, oldTitle,newFilm) => {
-    try{
-        const checkTitle = {title:oldTitle};
-        const updateTo = {$set:{title:newFilm.title,actor:newFilm.actor,imdbRating:newFilm.imdbRating}};
-        const updateFilm = await collection.updateOne(checkTitle,updateTo);
-        console.log(updateFilm);
-    }
-    catch (error){
-        console.log(error);
-    }
-}
