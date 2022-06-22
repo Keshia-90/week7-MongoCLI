@@ -2,7 +2,7 @@ const yargs = require("yargs");
 
 const { connection, client } = require("./db/connection");
 
-const { addFilm, deleteFilm, listFilms, filmDelete} = require("./utils");
+const { addFilm, deleteFilm, listFilms, updateFilm } = require("./utils");
 
 const app = async (yargsObj) => {
     const collection = await connection();
@@ -11,9 +11,12 @@ const app = async (yargsObj) => {
         console.log("success, entry added");
     } else if(yargsObj.delete){
         await deleteFilm(collection, {title: yargsObj.title});
-        console.log("success, entry deleted")
+        console.log("success, entry deleted");
     } else if(yargsObj.list) {
         await listFilms(collection);
+    } else if(yargsObj.update){
+        await updateFilm(collection,yargsObj.update, {title:yargsObj.title, actor:yargsObj.actor, imdbRating:yargsObj.imdbRating});
+        console.log("Success, entry updated!");
     }else {
         console.log("Incorrect command");
     }
